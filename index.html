@@ -255,6 +255,10 @@
 </head>
 <body>
 
+  <button id="playMusic">Play Music 🎵</button>
+<audio id="bgMusic" src="audio/Kiki's Delivery Service - Umi No Mieru Machi Piano.mp3" loop></audio>
+
+
     <section class="card-cta fade-in" style="text-align:center; margin-top:20px;">
   <h3 style="color:var(--accent)">Хүслээ бодоорой!</h3>
 
@@ -557,6 +561,13 @@
     }
   });
 })();
+document.getElementById("playMusic").addEventListener("click", function () {
+  const audio = document.getElementById("bgMusic");
+  audio.volume = 0.6;
+  audio.play();
+  this.style.display = "none"; // hide button after playing
+});
+
 </script>
 
   
