@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday!</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ffd166;
+      --muted:#9fb3c8;
+      --glass: rgba(255,255,255,0.04);
+      --radius:18px;
+      --maxwidth:980px;
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:var(--font-sans);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(255,209,102,0.04), transparent 10%),
+        radial-gradient(1000px 500px at 90% 90%, rgba(255,91,89,0.03), transparent 10%),
+        var(--bg);
+      color:#e6f0f6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{ max-width:var(--maxwidth); margin:36px auto; padding:28px; }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    header{ display:flex; gap:18px; align-items:center; margin-bottom:18px; }
+
+    .avatar{
+      width:96px; height:96px; border-radius:50%;
+      background:linear-gradient(135deg, rgba(255,209,102,0.12), rgba(255,91,89,0.06));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:34px; color:var(--accent);
+      border:1px solid rgba(255,255,255,0.04);
+      flex:0 0 96px;
+    }
+
+    h1{ margin:0; font-size:28px; line-height:1.05; display:flex; flex-direction:column; gap:6px; }
+
+    .typed{
+      font-family: "Courier New", monospace;
+      color:var(--accent);
+      font-size:22px;
+      white-space:nowrap;
+      overflow:hidden;
+      border-right:2px solid rgba(255,255,255,0.12);
+      width:18ch;
+      animation: blink 1s steps(1,end) infinite;
+    }
+    @keyframes blink{ 50%{ border-color: transparent; } }
+
+    .subtitle{ color:var(--muted); font-size:14px; margin-top:6px; }
+
+    .grid{ display:grid; grid-template-columns: 1fr 360px; gap:18px; margin-top:18px; }
+    @media (max-width:880px){ .grid{ grid-template-columns: 1fr; } .avatar{ width:72px; height:72px; font-size:26px; flex:0 0 72px; } }
+
+    .left{ display:flex; flex-direction:column; gap:18px; }
+
+    .cake { width:260px; }
+    .flame { animation: flicker 0.3s infinite alternate; }
+    @keyframes flicker { from { transform: scale(1); opacity: 1; } to { transform: scale(1.2); opacity: 0.85; } }
+
+    .gallery{ display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:10px; }
+    .photo{ background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03)); border-radius:12px; padding:10px; display:flex; align-items:center; justify-content:center; min-height:96px; overflow:hidden; position:relative; }
+    .photo img{ width:100%; height:100%; object-fit:cover; border-radius:8px; display:block; }
+
+    .timeline{ background:var(--glass); border-radius:12px; padding:12px; font-size:14px; color:var(--muted); }
+    .timeline .event{ display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px dashed rgba(255,255,255,0.02); }
+    .timeline .event:last-child{ border-bottom:0; }
+    .time-dot{ width:10px; height:10px; border-radius:50%; background:var(--accent); margin-top:6px; flex:0 0 12px; }
+
+    .right{ display:flex; flex-direction:column; gap:12px; }
+    .card-cta{ background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:14px; text-align:center; }
+    .btn{ display:inline-block; background:var(--accent); color:#0b1220; padding:10px 14px; border-radius:12px; font-weight:700; text-decoration:none; cursor:pointer; border:0; box-shadow: 0 6px 18px rgba(255,209,102,0.08); }
+    .small{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+    footer{ margin-top:20px; font-size: 100px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+    .confetti-canvas{ position:absolute; left:0; top:0; right:0; bottom:0; pointer-events:none; }
+    .balloons{ position:absolute; right:-40px; top:-60px; transform:rotate(-8deg); opacity:0.85; user-select:none; mix-blend-mode:screen; pointer-events:none; }
+
+    .credit{ font-size:12px; color:var(--muted); }
+    .fade-in{ animation: fadeIn .6s ease both; }
+    @keyframes fadeIn{ from{ opacity:0; transform: translateY(6px);} to{ opacity:1; transform:none;} }
+    .meta{ display:flex; gap:8px; align-items:center; justify-content:flex-end; font-size:13px; color:var(--muted); }
+    a.link{ color:var(--accent); text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<section class="card-cta fade-in" style="text-align:center; margin-top:20px;">
+  <h3 style="color:var(--accent)">Хүслээ бодоорой!</h3>
+
+  <div class="cake-container" style="position:relative; display:inline-block;">
+    <img src="images/istockphoto-901911608-612x612.jpg" class="cake" style="width:260px;">
+    <img src="images/images.jpg" class="flame" id="fl1" style="position:absolute; top:40px; left:98px; width:20px;">
+    <img src="images/images.jpg" class="flame" id="fl2" style="position:absolute; top:40px; left:122px; width:20px;">
+    <img src="images/images.jpg" class="flame" id="fl3" style="position:absolute; top:40px; left:145px; width:20px;">
+  </div>
+
+  <br><br>
+  <button id="blowBtn" class="btn">Үлээх</button>
+
+  <div id="afterMessage" style="display:none; margin-top:14px; font-size:18px; color:var(--accent);">
+    🎉 ВҮҮҮҮҮ!!!! ТӨРСӨН ӨДРИЙН МЭНД ХҮРГЭЕ!!! 🎉
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="card" id="pageCard" role="main" aria-labelledby="title">
+    <canvas class="confetti-canvas" id="confetti"></canvas>
+    <svg class="balloons" width="240" height="240" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g opacity="0.95">
+        <ellipse cx="50" cy="60" rx="28" ry="36" fill="#ffd166"/>
+        <path d="M50 100 C52 112 60 118 54 130" stroke="#ffd166" stroke-width="2" fill="none"/>
+        <ellipse cx="110" cy="50" rx="24" ry="32" fill="#ef476f"/>
+        <path d="M110 88 C112 100 120 106 116 118" stroke="#ef476f" stroke-width="2" fill="none"/>
+        <ellipse cx="150" cy="70" rx="18" ry="24" fill="#06d6a0"/>
+        <path d="M150 96 C152 106 160 110 156 120" stroke="#06d6a0" stroke-width="2" fill="none"/>
+      </g>
+    </svg>
+
+    <header class="fade-in">
+      <div class="avatar" id="avatar">B</div>
+      <div style="flex:1;">
+        <h1 id="title">
+          <span style="font-weight:700">Happy Birthday, <span id="BROTHER_NAME">Brother</span> 🎉</span>
+          <span class="typed" id="typewriter">loading... </span>
+        </h1>
+        <div class="subtitle">ЦААААН ЦАААН ЦАААРААНЦАНЦАНЦАН!!!</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;">
+        <div class="meta">
+          <div class="credit">Made with ♥ by your sibling</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="left">
+        <section class="gallery card-cta fade-in" aria-label="Photos">
+          <strong style="display:block;text-align:left;margin-bottom:8px;color:var(--accent);">Memory Gallery</strong>
+          <div class="gallery" id="gallery">
+            <div class="photo"><img src="images/IMG_0818.JPEG"></div>
+            <div class="photo"><img src="images/IMG_1307.JPEG"></div>
+            <div class="photo"><img src="images/IMG_1557.JPEG"></div>
+          </div>
+          <div class="small"> <code>&lt;&gt;</code></div>
+        </section>
+
+        <section class="timeline fade-in" aria-label="Timeline">
+          <strong style="display:block;margin-bottom:8px;color:var(--accent)">Mini Timeline</strong>
+          <div class="event"><div class="time-dot" aria-hidden="true"></div><div><b>2014</b> — 11 жилийн өмнө энэ өдөр миний дүү төрж байжээ.</div></div>
+          <div class="event"><div class="time-dot"></div><div><b>Today</b> — Одоо бол зөндөө том залуу болжээ.</div></div>
+        </section>
+
+        <footer>
+          <div class="credit">Дүүдээ хайртай шүү</div>
+          <div class="small"></div>
+        </footer>
+      </div>
+
+      <aside class="right">
+        <div class="card-cta fade-in" aria-label="Main message">
+          <h3 style="margin:0 0 8px 0;color:var(--accent)">СҮПРИЙЗ!!</h3>
+          <p style="margin:0 0 12px 0;color:var(--muted);line-height:1.45">Хүүш <span id="nameInline"></span> — Өнөөдөр агаа нь энэ бялууг яг бариад очиж чадахгүй ч сэтгэл зүрхээрээ үүрд хамт байгаа юм шүү, Аааая</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+            <button class="btn" id="confettiBtn" aria-pressed="false">🎊 Throw confetti</button>
+            <button class="btn" id="playBtn">▶ Play song</button>
+          </div>
+          <div class="small"><code></code>.</div>
+        </div>
+
+        <div class="card-cta fade-in" aria-label="Wish box">
+          <strong style="display:block;margin-bottom:8px;color:var(--accent)">Type a quick wish</strong>
+          <textarea id="wishText" rows="3" style="width:100%;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;justify-content:flex-end;">
+            <button class="btn" id="sendWish">Send (local)</button>
+          </div>
+          <div class="small" id="wishNote">This stores the wish locally so he can see it while the page is open.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- Audio element -->
+<audio id="birthdaySong" src="audio/birthday-song.mp3"></audio>
+
+<script>
+  const BROTHER_NAME = "SIIMON SIICHALII";
+  const TYPEWRITER_MESSAGES = ["Happy Birthday!", "Miss you loads", "Proud of you"];
+  const AVATAR_LETTER = (BROTHER_NAME && BROTHER_NAME[0]) || "B";
+
+  document.getElementById('BROTHER_NAME').textContent = BROTHER_NAME;
+  document.getElementById('avatar').textContent = AVATAR_LETTER;
+  document.getElementById('nameInline').textContent = BROTHER_NAME;
+
+  // Typewriter
+  (function typewriterCycle(){
+    const el = document.getElementById('typewriter');
+    const msgs = TYPEWRITER_MESSAGES;
+    let i=0;
+    function show(){
+      const text = msgs[i % msgs.length];
+      el.style.width = (text.length + 2) + "ch";
+      el.textContent = text;
+      i++;
+      setTimeout(show, 2400);
+    }
+    show();
+  })();
+
+  // Confetti
+  (function initConfetti(){
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let w=0,h=0, particles=[];
+    function resize(){ w=canvas.width = canvas.clientWidth; h=canvas.height = canvas.clientHeight; }
+    window.addEventListener('resize', resize); resize();
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+    function spawnBurst(count){
+      for(let i=0;i<count;i++){
+        particles.push({ x: rand(0,w), y: -10, vx: rand(-2,2), vy: rand(1,6), size: rand(6,14), rot: rand(0,360), vr: rand(-8,8), color: ['#ffd166','#ef476f','#06d6a0','#118ab2'][Math.floor(rand(0,4))] });
+      }
+    }
+    function update(){
+      ctx.clearRect(0,0,w,h);
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.vy += 0.12;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        ctx.save();
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+        ctx.restore();
+        if(p.y>h+40) particles.splice(i,1);
+      }
+      requestAnimationFrame(update);
+    }
+    update();
+    document.getElementById('confettiBtn').addEventListener('click',()=>{ spawnBurst(60); setTimeout(()=>spawnBurst(30),350); setTimeout(()=>spawnBurst(18),700); });
+  })();
+
+  // Wish box
+  (function wishBox(){
+    const send = document.getElementById('sendWish');
+    const txt = document.getElementById('wishText');
+    const note = document.getElementById('wishNote');
+    send.addEventListener('click', ()=>{
+      const val = txt.value.trim();
+      if(!val){ note.textContent="Write something first."; return; }
+      note.textContent="Wish added — he'll see this while the page is open.";
+      const toast = document.createElement('div');
+      toast.textContent="Sent: "+val;
+      toast.style.position='fixed'; toast.style.right='20px'; toast.style.bottom='20px';
+      toast.style.background='linear-gradient(90deg, rgba(255,255,255,0.03), rgba(0,0,0,0.04))';
+      toast.style.border='1px solid rgba(255,255,255,0.03)';
+      toast.style.padding='10px 14px'; toast.style.borderRadius='10px';
+      toast.style.color='#dff3ff';
+      document.body.appendChild(toast);
+      setTimeout(()=>toast.remove(),4200); txt.value='';
+    });
+  })();
+
+  // Play audio
+  const playBtn = document.getElementById('playBtn');
+  const audio = document.getElementById('birthdaySong');
+  playBtn.addEventListener('click',()=>{
+    if(audio.paused){ audio.play(); playBtn.textContent="⏸ Pause song";

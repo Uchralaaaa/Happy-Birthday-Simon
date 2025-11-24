@@ -468,48 +468,7 @@
     })();
 
     // play button: prompts user for an audio file/URL to play
-    (function playSong(){
-      const playBtn = document.getElementById('playBtn');
-      let audio = null;
-      playBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        if(!audio){
-          const url = prompt("Paste a public audio URL (mp3) or leave blank to pick a file from this device:");
-          if(url){
-            audio = new Audio(url);
-            audio.volume = 0.9;
-            audio.play();
-            playBtn.textContent = "⏸ Pause song";
-            playBtn.dataset.playing = "1";
-            return;
-          }
-          // file picker fallback
-          const input = document.createElement('input');
-          input.type = 'file';
-          input.accept = 'audio/*';
-          input.onchange = (ev) => {
-            const file = ev.target.files[0];
-            if(!file) return;
-            const src = URL.createObjectURL(file);
-            audio = new Audio(src);
-            audio.play();
-            playBtn.textContent = "⏸ Pause song";
-            playBtn.dataset.playing = "1";
-          };
-          input.click();
-        } else {
-          if(playBtn.dataset.playing === "1"){
-            audio.pause();
-            playBtn.textContent = "▶ Play song";
-            playBtn.dataset.playing = "0";
-          } else {
-            audio.play();
-            playBtn.textContent = "⏸ Pause song";
-            playBtn.dataset.playing = "1";
-          }
-        }
-      });
-    })();
+    
 
     // small progressive enhancement: replace gallery placeholders with sample images if you add links here
     (function fillGallery(){
@@ -553,6 +512,28 @@
     window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='c'){ document.getElementById('confettiBtn').click(); } });
 
   </script>
+
+  <!-- Add this inside your <body>, around your Play button area -->
+<audio id="birthdaySong" src="audio/birthday-song.mp3" preload="auto"></audio>
+
+<script>
+(function(){
+  const playBtn = document.getElementById('playBtn');
+  const audio = document.getElementById('birthdaySong');
+
+  playBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    if(audio.paused){
+      audio.play().catch(err => console.log("Autoplay prevented:", err));
+      playBtn.textContent = "⏸ Pause song";
+    } else {
+      audio.pause();
+      playBtn.textContent = "▶ Play song";
+    }
+  });
+})();
+</script>
+
 
   
 </body>
