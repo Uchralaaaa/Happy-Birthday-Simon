@@ -558,21 +558,25 @@ document.getElementById("playMusic").addEventListener("click", function () {
 
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("blowBtn");
-  const flames = ["fl1", "fl2", "fl3"];
-  const msg = document.getElementById("afterMessage");
+(function() {
+    // Get the button element by its ID
+    const btn = document.getElementById("blowBtn");
+    if (!btn) return; // Exit if the button doesn't exist
 
-  if(!btn) return;
+    // Add click event listener to the button
+    btn.addEventListener("click", () => {
+        // Hide candle flames
+        ["fl1", "fl2", "fl3"].forEach(id => {
+            const fl = document.getElementById(id);
+            if (fl) fl.style.display = "none"; // hide each flame element
+        });
 
-  btn.addEventListener("click", () => {
-    flames.forEach(id => {
-      const fl = document.getElementById(id);
-      if(fl) fl.style.display = "none";  // hides flames
+        // Show a message after blowing out the candles
+        const msg = document.getElementById("afterMessage");
+        if (msg) msg.style.display = "block";
     });
-    if(msg) msg.style.display = "block";  // shows the birthday message
-  });
-});
+})();
+
 </script>
   
 </body>
