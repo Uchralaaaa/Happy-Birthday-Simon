@@ -345,11 +345,18 @@
 
           <div class="card-cta fade-in" aria-label="Wish box">
             <strong style="display:block;margin-bottom:8px;color:var(--accent)">Type a quick wish</strong>
-            <textarea id="wishText" rows="3" style="width:100%;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
-            <div style="display:flex;gap:8px;margin-top:8px;justify-content:flex-end;">
-              <button class="btn" id="sendWish">Send (local)</button>
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSeFu8pCAUcWeh2icAVmRj-eOilxluulgoc8DJdqCKZPxjjjyw/formResponse
+" method="POST" target="_blank">
+  <textarea 
+    name="entry.1657715530" 
+    placeholder="Write your wish..."
+    style="width:300px;height:100px;">
+  </textarea>            
+  <div style="display:flex;gap:8px;margin-top:8px;justify-content:flex-end;">
+              <button type="submit">Send Wish 🎉</button>
+  </form>
             </div>
-            <div class="small" id="wishNote">This stores the wish locally so he can see it while the page is open. For a permanent guestbook you'd add a backend.</div>
+            <div class="small" id="wishNote"></div>
           </div>
         </aside>
       </div>
@@ -511,7 +518,25 @@
     /* small accessibility: keyboard trigger for confetti (press 'c') */
     window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='c'){ document.getElementById('confettiBtn').click(); } });
 
+
+    document.getElementById("sendWish").addEventListener("click", function () {
+  const wish = document.getElementById("wishText").value.trim();
+  const note = document.getElementById("wishNote");
+
+  if (wish.length === 0) {
+    note.textContent = "Write something first!";
+    return;
+  }
+
+  note.textContent = "Wish saved locally! (But will disappear after refresh.)";
+  
+  // Here you can store locally (temporary)
+  localStorage.setItem("birthday_wish", wish);
+});
+
   </script>
+
+  
 
   <!-- Add this inside your <body>, around your Play button area -->
 <audio id="birthdaySong" src="audio/birthday-song.mp3" preload="auto"></audio>
@@ -533,7 +558,6 @@
   });
 })();
 </script>
-
 
   
 </body>
